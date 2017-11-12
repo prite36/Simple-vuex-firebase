@@ -1,23 +1,29 @@
 <template>
   <div class="login">
-    <input type="button" name="" value="+" @click="add">
-    {{count}}
+    <center>
+      <input type="text" name="" value="" v-model="user.email">
+      <input type="password" name="" value="" v-model="user.password">
+      <button type="button" name="button" @click="signin(user)">Sign in</button>
+    </center>
   </div>
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import {mapActions} from 'vuex'
 export default{
   name: 'Login',
   data () {
     return {
+      user: {
+        email: '',
+        password: ''
+      }
     }
   },
   computed: {
-    ...mapGetters(['count'])
   },
   methods: {
-    ...mapActions(['add'])
+    ...mapActions(['signin'])
   }
 }
 </script>

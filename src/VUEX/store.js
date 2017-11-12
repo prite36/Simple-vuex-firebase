@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import firebase from 'firebase'
+import router from '../router'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 let config = {
@@ -15,19 +16,24 @@ firebase.initializeApp(config)
 const store = new Vuex.Store({
   strict: true,
   state: {
-    count: 0
   },
   getters: {
-    count: state => state.count
   },
   mutations: {
-    add (state) {
-      state.count += 1
-    }
   },
   actions: {
-    add ({commit}) {
-      commit('add')
+    signin (payload, user) {
+      console.log(payload)
+      console.log(user.email)
+      console.log(user.password)
+      firebase.auth().signInWithEmailAndPassword(user.email, user.password).then(
+        (user) => {
+          router.replace('AddItem')
+        },
+        (err) => {
+          alert('Oops. ' + err.message)
+        }
+      )
     }
   }
 })

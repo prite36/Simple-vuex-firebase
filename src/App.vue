@@ -6,10 +6,12 @@
 
 <script>
 import Login from './components/Login.vue'
+import AddItem from './components/AddItem.vue'
 export default {
   name: 'app',
   components: {
-    Login: Login
+    Login: Login,
+    AddItem: AddItem
   }
 }
 </script>
