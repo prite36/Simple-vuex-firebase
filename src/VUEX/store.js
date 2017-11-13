@@ -23,9 +23,6 @@ const store = new Vuex.Store({
   },
   actions: {
     signin (payload, user) {
-      console.log(payload)
-      console.log(user.email)
-      console.log(user.password)
       firebase.auth().signInWithEmailAndPassword(user.email, user.password).then(
         (user) => {
           router.replace('AddItem')
@@ -34,6 +31,11 @@ const store = new Vuex.Store({
           alert('Oops. ' + err.message)
         }
       )
+    },
+    addItem (payload, detailItem) {
+      firebase.database().ref('Item/' + detailItem.typeItem).set({
+        nameItem: detailItem.nameItem
+      })
     }
   }
 })
