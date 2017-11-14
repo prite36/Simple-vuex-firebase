@@ -16,16 +16,23 @@ firebase.initializeApp(config)
 const store = new Vuex.Store({
   strict: true,
   state: {
+    statusLogin: false
   },
   getters: {
+    statusLogin: state => state.statusLogin
   },
   mutations: {
+    updateStatus (state, status) {
+      state.statusLogin = status
+    }
   },
   actions: {
-    signin (payload, user) {
+    signin ({commit}, user) {
+      console.log(user)
       firebase.auth().signInWithEmailAndPassword(user.email, user.password).then(
         (user) => {
           router.replace('AddItem')
+          commit('updateStatus', true)
         },
         (err) => {
           alert('Oops. ' + err.message)
