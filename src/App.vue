@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="left" v-if="statusLogin">
-      hello
+      <center>bar</center>
     </div>
     <div class="right">
       <router-view/>
@@ -29,9 +29,13 @@ export default {
 .left {
   float:left;
   width: 10%;
+  background-color: black;
+  height: 100vh;
+  color: white;
 }
 .right {
   float:left;
-  width: 90%;
+  width: 88%;
+  padding-left: 2%;
 }
 </style>

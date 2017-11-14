@@ -28,7 +28,6 @@ const store = new Vuex.Store({
   },
   actions: {
     signin ({commit}, user) {
-      console.log(user)
       firebase.auth().signInWithEmailAndPassword(user.email, user.password).then(
         (user) => {
           router.replace('AddItem')
@@ -39,9 +38,10 @@ const store = new Vuex.Store({
         }
       )
     },
-    addItem (payload, detailItem) {
-      firebase.database().ref('Item/' + detailItem.typeItem).set({
-        nameItem: detailItem.nameItem
+    addRoom (payload, detailRoom) {
+      console.log(detailRoom)
+      firebase.database().ref('Item/meetingroom/').child(detailRoom.roomSize).child(detailRoom.nameRoom).set({
+        status: 'open'
       })
     }
   }
