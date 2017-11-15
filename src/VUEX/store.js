@@ -16,14 +16,20 @@ firebase.initializeApp(config)
 const store = new Vuex.Store({
   strict: true,
   state: {
-    statusLogin: false
+    statusLogin: false,
+    items: ''
   },
   getters: {
-    statusLogin: state => state.statusLogin
+    statusLogin: state => state.statusLogin,
+    items: state => state.items
   },
   mutations: {
     updateStatus (state, status) {
       state.statusLogin = status
+    },
+    getItem (state, items) {
+      console.log(items)
+      state.items = items
     }
   },
   actions: {
@@ -39,10 +45,22 @@ const store = new Vuex.Store({
       )
     },
     addRoom (payload, detailRoom) {
-      console.log(detailRoom)
-      firebase.database().ref('Item/meetingroom/').child(detailRoom.roomSize).child(detailRoom.nameRoom).set({
+      firebase.database().ref('Item/meetingroom/').child(detailRoom.sizeRoom).child(detailRoom.nameRoom).set({
         status: 'open'
       })
+    },
+    addDevice (payload, detailDevice) {
+      firebase.database().ref('Item/Device/').child(detailDevice.typeDevice).child(detailDevice.nameDevice).set({
+        status: 'open'
+      })
+    },
+    getItem ({commit}) {
+      firebase.database().ref('Item').on('value', function (snapshot) {
+        commit('getItem', snapshot.val())
+      })
+    },
+    removeItem (payload, child) {
+      firebase.database().ref('Item/' + child).remove()
     }
   }
 })

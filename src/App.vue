@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <div class="left" v-if="statusLogin">
-      <center>bar</center>
+      <router-link to="ShowItem">ShowItem</router-link>
+      <router-link to="AddItem">AddItem</router-link>
     </div>
     <div class="right">
       <router-view/>
@@ -12,12 +13,14 @@
 <script>
 import Login from './components/Login.vue'
 import AddItem from './components/AddItem.vue'
+import ShowItem from './components/ShowItem.vue'
 import {mapGetters} from 'vuex'
 export default {
   name: 'app',
   components: {
     Login: Login,
-    AddItem: AddItem
+    AddItem: AddItem,
+    ShowItem: ShowItem
   },
   computed: {
     ...mapGetters(['statusLogin'])
@@ -29,7 +32,7 @@ export default {
 .left {
   float:left;
   width: 10%;
-  background-color: black;
+  background-color: pink;
   height: 100vh;
   color: white;
 }
